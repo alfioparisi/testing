@@ -32,9 +32,11 @@ $(function() {
          * and that the URL is not empty.
          */
          it('have url', () => {
-           // Put all the urls into an array and check that it's not empty.
-           expect(allFeeds.map(feed => feed.url)).toBeDefined();
-           expect(allFeeds.map(feed => feed.url).length).not.toBe(0);
+           // Chek that every feed as a url defined.
+           allFeeds.forEach(feed => {
+             expect(feed.url).toBeDefined();
+             expect(feed.url).not.toBe('');
+           });
          });
 
 
@@ -43,9 +45,11 @@ $(function() {
          * and that the name is not empty.
          */
          it('have name', () => {
-           // Put all the names into an array and check that it's not empty.
-           expect(allFeeds.map(feed => feed.name)).toBeDefined();
-           expect(allFeeds.map(feed => feed.name).length).not.toBe(0);
+           // Check that every feed has a name defined.
+           allFeeds.forEach(feed => {
+             expect(feed.name).toBeDefined();
+             expect(feed.name).not.toBe('');
+           });
          });
     });
 
@@ -90,14 +94,11 @@ $(function() {
       * the use of Jasmine's beforeEach and asynchronous done() function.
       */
 
-      // setTimeout is needed to test async functions.
-      beforeEach(done => setTimeout(() => {
-        loadFeed(0);
-        done();
-      }, 3000));
+      // Pass done to beforeEach, so the spec will wait for loadFeed() to run.
+      beforeEach(done => loadFeed(0, done));
 
       // Check that .entry has content.
-      it('should not be empty', () => expect($('.entry').html()).not.toBe(''));
+      it('should not be empty', () => expect($('.feed .entry').length).not.toBe(0));
 
     });
 
@@ -120,8 +121,15 @@ $(function() {
                done();
              });
            });
-         }, 3000)
+         }, 3000);
        });
+       beforeEach(done => loadFeed(0, () => {
+         a = $('.feed').html();
+         loadFeed(2, () => {
+           b = $('.feed').html();
+           done();
+         });
+       }));
 
       it('should update the content', () => {
         // Check if the list actually has content.
