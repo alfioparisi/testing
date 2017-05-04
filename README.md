@@ -44,5 +44,23 @@ Review the Feed Reader Testing [Project Rubric](https://review.udacity.com/#!/pr
 17. No test should be dependent on the results of another.
 18. Callbacks should be used to ensure that feeds are loaded before they are tested.
 19. Implement error handling for undefined variables and out-of-bound array access.
-20. When complete - all of your tests should pass. 
+20. When complete - all of your tests should pass.
 21. Write a README file detailing all steps required to successfully run the application. If you have added additional tests (for Udacious Test Coverage),  provide documentation for what these future features are and what the tests are checking for.
+
+## How to run.
+
+To run the app you have to set up a local server.
+
+To set up a local server with _python_ open the command line, enter the project
+directory, then enter the _dist_ directory, and finally type :
+_python -m SimpleHTTPServer_.
+This will create a local server on port 8000.
+To access it, the URL is _http://127.0.0.1:8000_.
+On the loaded page, click on _app.html_ and the app will run.
+
+To set up a local server with _Node.js_, first you need to install the HTTP-server service package from _npm_:
+_npm install -g http-server_
+Then enter the project directory and type in the command line:
+_http-server_
+This should start your local server.
+To access it go to _http://localhost:8080_
